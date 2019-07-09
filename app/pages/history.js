@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {HistorySection} from './components/';
 import MyLayout from '../base/layout';
+import { View } from "react-native";
 import { Grid, Row } from "react-native-easy-grid";
 export default class HistoryPage extends Component {
 
@@ -12,11 +13,9 @@ export default class HistoryPage extends Component {
   render() {
     return (
       <MyLayout>
-        <Grid>
-          <Row>
-            <HistorySection  navigation={this.props.navigation}/>
-          </Row>
-        </Grid>
+        <View>
+          <HistorySection navigation={this.props.navigation} />
+        </View>
       </MyLayout>
     );
   }

@@ -6,13 +6,7 @@ import {
   Button
 } from 'react-native-ui-kitten';
 import { Grid, Row, Col } from "react-native-easy-grid";
-// import console = require('console');
-import { createDrawerNavigator, createAppContainer } from "react-navigation";
 
-const Drawer = createDrawerNavigator(
-  <Button onPress={() => this.getValue(9, "operand")}>9</Button>
-);
-const AppContainer = createAppContainer(Drawer);
 
 export default class InputSection extends Component {
 
@@ -22,10 +16,12 @@ export default class InputSection extends Component {
 
   getValue = (value, type) => {
     if(type == "operand" || type == "operator"){
-      this.props.state.setStateInput(this.props.state.result+value);
+      this.props.state.setStateInput(value);
       return;
-    }else if(type == "Clear"){
-      this.props.state.setStateInput(this.props.state.result.substring(0, this.state.result.length-1));
+    }else if(type == "clear"){
+      console.log(this.props.state.result.length-1);
+      var input = this.props.state.result.length-1 != 0 ? this.props.state.result.substring(0, this.props.state.result.length-1) : " ";
+      this.props.state.setStateInput(input);
       return;
     }else if(type == "calculate"){
       var temp = eval(this.props.state.result);
@@ -35,7 +31,7 @@ export default class InputSection extends Component {
   }
 
   clearState = () => {
-    this.props.state.setStateInput("");
+    this.props.state.setStateResult("");
   }
 
   render() {
@@ -83,7 +79,7 @@ export default class InputSection extends Component {
               <Button style={styles.numberButton} textStyle={styles.textStyle} onPress={() => this.getValue(0, "operand")}>0</Button>
             </Col>
             <Col>
-              <Button style={styles.numberButton} textStyle={styles.clrTextStyle} onPress={() => this.getValue("CLR", "Clear")} onLongPress={this.clearState}>CLR</Button>
+              <Button style={styles.numberButton} textStyle={styles.clrTextStyle} onPress={() => this.getValue("CLR", "clear")} onLongPress={this.clearState}>CLR</Button>
             </Col>
           </Row>
         </Col>
@@ -114,11 +110,11 @@ export default class InputSection extends Component {
             </Col>
           </Row>
         </Col>
-        <Col style={{width:"17%"}}>
+        {/* <Col style={{width:"17%"}}>
           <Row>
             <Button style={styles.moreOptions} textStyle={styles.optionsStyle} onPress={() => this.getValue('=', "calculate")}>{'<'}</Button>
           </Row>
-        </Col>
+        </Col> */}
       </Grid>
     );
   }

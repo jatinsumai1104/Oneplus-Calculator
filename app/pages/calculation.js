@@ -3,26 +3,38 @@ import React, {Component} from 'react';
 import {InputSection, OutputSection } from './components/';
 import MyLayout from '../base/layout';
 import { Grid, Row } from "react-native-easy-grid";
-import { Button } from "react-native-ui-kitten";
 export default class CalculationPage extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      prevInput: "",
+      data: [],
       result: "",
+      outputDone: false
     }
     this.state['setStateInput'] = this.setStateInput;
     this.state['setStateResult'] = this.setStateResult;
   }
 
   setStateInput = (value) => {
+    if(this.state.outputDone){
+      this.state.result = "";
+      this.state.outputDone = false;
+    }else{
+      value = this.state.result + value;
+    }
     this.setState({result: value});
   }
 
   setStateResult = (value) => {
-    this.state.prevInput = this.state.result;
-    this.setState({result: value}); 
+    value += "";
+    var date = new Date().toDateString() + "";
+    if(date in this.state.data){
+      this.state.data[date].push({input: this.state.result, result: value});
+    }else{
+      this.state.data[date] = [{input: this.state.result, result: value}];
+    }
+    this.setState({result: value, outputDone: true}); 
   }
 
   render() {

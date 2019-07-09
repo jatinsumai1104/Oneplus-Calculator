@@ -17,7 +17,7 @@ export default class MyLayout extends Component {
         <ApplicationProvider
           mapping={mapping}
           theme={lightTheme}>
-          <Layout style={{flex: 1}}>
+          <Layout style={{flex: 1, backgroundColor: "#fff"}}>
             {this.props.children}
           </Layout>
         </ApplicationProvider>

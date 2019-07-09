@@ -14,7 +14,7 @@ export default class OutputSection extends Component {
   }
 
   showHistory = () => {
-    this.props.navigation.navigate('history', this.props.state);
+    this.props.navigation.navigate('history', {data: this.props.state.data});
   }
 
 
@@ -34,11 +34,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#111"
   },
   textInputStyle: {
-    fontSize: 80,
+    fontSize: 60,
     color: "#fff",
     paddingTop: "45%",
     textAlign: "right",
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    letterSpacing: 3
   },
   textOutputStyle: {
     fontSize: 30,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     width: "20%",
     marginHorizontal: "40%",
     marginVertical: "15%",
-    backgroundColor: "blue",
+    backgroundColor: "transparent",
     borderWidth: 0,
     borderRadius: 0
   },
